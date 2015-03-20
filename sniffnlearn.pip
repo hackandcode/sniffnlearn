@@ -1,0 +1,6 @@
+# - These are the list of required libraries
+# - The version is important, it is required that you
+# - test the latest version and add it here
+# - The library names are case sensitive
+
+google-api-python-client==1.4.0
