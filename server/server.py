@@ -1,9 +1,9 @@
 from BaseHTTPServer import BaseHTTPRequestHandler
 import urlparse
 import searcher
+import socket
 
 class GetHandler(BaseHTTPRequestHandler):
-    
     def do_GET(self):
         parsed_path = urlparse.urlparse(self.path)
         message =searcher.search(parsed_path.query)
