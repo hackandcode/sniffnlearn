@@ -20,7 +20,7 @@ class Search():
 
     """
     def __init__(self):
-        self.__dv_key = "AIzaSyBy-F3yeKwZkdoogLU3doWgK9oUyx4mFIQ"
+        self.__dv_key = "" #your google developer api key to be given
         self.__book_query = ""
         self.__paper_query = ""
         self.__book_index = 1
