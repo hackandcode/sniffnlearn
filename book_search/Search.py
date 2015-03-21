@@ -4,6 +4,8 @@ __author__ = 'amit.gupta.ece13@iitbhu.ac.in (DarKnight)'
 #
 #
 
+import pprint
+
 from googleapiclient.discovery import build
 
 
@@ -18,11 +20,11 @@ class Search():
 
     """
     def __init__(self):
-        self.dv_key = "AIzaSyBy-F3yeKwZkdoogLU3doWgK9oUyx4mFIQ"
-        self.book_query = ""
-        self.paper_query = ""
-        self.book_index = 1
-        self.paper_index = 1
+        self.__dv_key = "" #your google developer api key to be given
+        self.__book_query = ""
+        self.__paper_query = ""
+        self.__book_index = 1
+        self.__paper_index = 1
         return
 
     def __search(self, query, index, max_limit=5):
@@ -40,7 +42,7 @@ class Search():
 
         """
         service = build("customsearch", "v1",
-                        developerKey=self.dv_key)
+                        developerKey=self.__dv_key)
         res = service.cse().list(q=query,
                                  cx='015974940825320028887:zqooin_a9z4',
                                  num=max_limit,
@@ -56,8 +58,8 @@ class Search():
         :return: returns the JSON file of required search result.
         """
         query += " books"
-        self.book_query = query
-        return self.__search(self.book_query, max_limit=max_limit, index=self.book_index)
+        self.__book_query = query
+        return self.__search(self.__book_query, max_limit=max_limit, index=self.__book_index)
 
     def search_paper(self, query, max_limit=5):
         """
@@ -67,8 +69,8 @@ class Search():
         :return: returns the JSON file of required search result.
         """
         query = "filetype:pdf ' " + query + "' research paper"
-        self.paper_query = query
-        return self.__search(self.paper_query, max_limit=max_limit, index=self.paper_index)
+        self.__paper_query = query
+        return self.__search(self.__paper_query, max_limit=max_limit, index=self.__paper_index)
 
     def search_next(self, default=0):
         """
@@ -78,8 +80,13 @@ class Search():
         :return: returns the JSON file of required search result.
         """
         if default:
-            self.book_index += 5
-            return self.__search(self.book_query, index=self.book_index)
+            self.__book_index += 5
+            return self.__search(self.__book_query, index=self.__book_index)
         else:
-            self.paper_index += 5
-            return self.__search(self.paper_index, index=self.paper_index)
+            self.__paper_index += 5
+            return self.__search(self.__paper_index, index=self.__paper_index)
+
+
+s = Search()
+
+pprint.pprint(s.search_book("Machine Learning"))
