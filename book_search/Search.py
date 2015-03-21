@@ -63,7 +63,12 @@ class Search():
                                  num=max_limit,
                                  start=index,
                                  ).execute()
-        return res
+        data = '{"search":['
+        for i in range(5):
+            data += '{"'+res['items'][i]['htmlTitle'] + '":"' + res['items'][i]['link'] + '"},'
+        data += "]}"
+        data = data.encode('ascii', errors='ignore')
+        return data
 
     def search_book(self, query, max_limit=5):
         """
