@@ -4,3 +4,4 @@
 # - The library names are case sensitive
 
 google-api-python-client==1.4.0
+beautifulsoup4==4.3.2
