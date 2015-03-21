@@ -1,10 +1,10 @@
+#!/usr/bin/python
+
 __author__ = 'amit.gupta.ece13@iitbhu.ac.in (DarKnight)'
 
 #
 #
 #
-
-import pprint
 
 from googleapiclient.discovery import build
 
@@ -18,6 +18,21 @@ class Search():
     The class will raise a error if it is unable to connect to
     the server.
 
+    Usage:
+            s = Search()
+            s.search_book("Machine Learning", max_limit=6) - For book search
+            s.search_paper("Machine Learning", search_book(self, query, max_limit=5):max_limit=6)
+                                - For research paper search
+            s.search_next() - For next page of book search result
+            s.search_next(1) - For next page of research paper search result
+
+    Methods:
+            search_book(query, max_limit=5) - returns the json file of the required book search result
+            search_paper(self, query, max_limit=5): returns the json file of the required
+                                                        research paper search result
+            search_next(self, default=0): returns the json file for the next page of search result
+                                            0 for book
+                                            1 for research paper
     """
     def __init__(self):
         self.__dv_key = "" #your google developer api key to be given
@@ -85,8 +100,3 @@ class Search():
         else:
             self.__paper_index += 5
             return self.__search(self.__paper_index, index=self.__paper_index)
-
-
-s = Search()
-
-pprint.pprint(s.search_book("Machine Learning"))
