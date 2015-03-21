@@ -33,7 +33,9 @@ def mit_course(query):
     soup = BeautifulSoup(data)
     data = '{"mit_ocw":['
     for i in soup.find_all('a'):
-        data += '{"' + i.get_text() + '":"' + i.get('href')
+        data += '{"' + i.get_text() + '":"' + i.get('href') + '"},'
     data += "]}"
     data = data.encode('ascii', errors='ignore')
     return data
+
+print mit_course("Machine learning")
