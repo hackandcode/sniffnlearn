@@ -1,12 +1,12 @@
 from BaseHTTPServer import BaseHTTPRequestHandler
 import urlparse
 import searcher
+import socket
 
 class GetHandler(BaseHTTPRequestHandler):
-    
     def do_GET(self):
         parsed_path = urlparse.urlparse(self.path)
-        message =searcher.search(parsed_path.query)
+        message =searcher.search(parsed_path.query).encode('ascii','ignore')
         self.send_response(200)
         self.end_headers()
         self.wfile.write(message)
