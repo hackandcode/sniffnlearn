@@ -14,7 +14,7 @@ It is a basic framework that helps people search for courses,books,research pape
 
 ### Using our API individually
 - Send the get request to serverip:port/query
-requests.get("http://localhost:port"+query.replace(' ','+')
+- requests.get("http://localhost:port"+query.replace(' ','+')
 
 ## Team Name 
 
@@ -31,7 +31,7 @@ sniffnlearn
 
 - [X] Integrate various websites(Courseara, Udacity, MIT) 
 - [X] Create server API
-- []  Login capability
-- []  GUI
-- []  Rating facility
-- []  Course notification
+- [ ]  Login capability
+- [ ]  GUI
+- [ ]  Rating facility
+- [ ]  Course notification
