@@ -6,10 +6,15 @@ def search(query):
     rating = 0.0
     query = query.replace('+', ' ')
     result = ''
-    connection = MySQLdb.connect("localhost", "root", "newpass@123", "code42day")
+    connection = MySQLdb.connect("localhost", "root", "newpass@123","code42day")#create database manually
+    '''change hostname from localhost to your server IP
+    change user from 'root' to your user
+    change pass to your user's pass
+    '''
     query1 = query
     query = query.replace(' ', '').lower()
     cur = connection.cursor()
+    cur.execute("CREATE TABLE IF NOT EXISTS Searches (striptext VARACHAR(50),search TEXT,rating FLOAT")
     d = cur.execute("SELECT * FROM Searches WHERE striptext='%s';" % (str(query))  )
     if (d):
         result = cur.fetchall()
