@@ -19,15 +19,14 @@ def mit_course(query, max_limit=2):
         raise Exception("max_limit must be less than 10")
 
     a = query.split()
-    query = "http://search.mit.edu/search?site=ocw&client=mit&getfields=*&" +\
+    url = "http://search.mit.edu/search?site=ocw&client=mit&getfields=*&" +\
                 "output=xml_no_dtd&proxystylesheet=http%3A%2F%2Focw.mit.edu%2Fsearch%2Fgoogle-ocw" +\
                 ".xsl&requiredfields=WT%252Ecg_s%3ACourse+Home|WT%252Ecg_s%3AResource+Home&" +\
                 "sectionlimit=WT%252Ecg_s%3ACourse+Home|WT%252Ecg_s%3AResource+Home&as_dt=i&oe=" + \
                 "utf-8&departmentName=web&filter=0&courseName=&q="
-    for i in a:
-        query += "+" + i
-    query += "&btnG.x=0&btnG.y=0"
-    response = urllib2.urlopen(query)
+    url += query
+    url += "&btnG.x=0&btnG.y=0"
+    response = urllib2.urlopen(url)
     html = response.read()
     soup = BeautifulSoup(html)
     res = soup.find_all('p')
