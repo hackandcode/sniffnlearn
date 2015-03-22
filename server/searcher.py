@@ -23,12 +23,7 @@ def search(query):
         print result
         connection.query("INSERT INTO Searches (striptext,search,rating) \
                             VALUES ('%s','%s','%s');" % (str(query),str(result).encode('ascii','ignore'),str(rating)))
-    print result
-    #  connection.query(
-    #     "INSERT INTO Searches (striptext,search,rating) VALUES (" + str(query) + "," + result.encode("ascii",
-    #                                                                                                   "ignore") + str(rating) + ")")
-    #connection.close()
-
+    return result
 
 def coursera(query):
     try:
