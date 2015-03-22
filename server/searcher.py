@@ -1,29 +1,34 @@
 import urllib2, json
-import _mysql
+import MySQLdb
 import Search
-
 
 def search(query):
     rating = 0.0
     query = query.replace('+', ' ')
     result = ''
-    connection = _mysql.connect("localhost", "root", "newpass@123", "code42day")
+    connection = MySQLdb.connect("localhost", "root", "newpass@123", "code42day")
     query1 = query
-    query = query.replace(' ', '')
-    data = connection.query("SELECT * FROM Searches WHERE striptext='%s';" % (query)  )
-    if (data):
-        result = data.fetchall()
-        result = result[1]
+    query = query.replace(' ', '').lower()
+    cur = connection.cursor()
+    d = cur.execute("SELECT * FROM Searches WHERE striptext='%s';" % (str(query))  )
+    if (d):
+        result = cur.fetchall()
+        result = (result[0])[1]
     else:
+	print "check"
         books = Search.Search()
         data_books = books.search_book(query)
         coursera_result = coursera(query1)
         udacity_result = udacity(query1.replace('+', ' '))
         result = data_books + coursera_result + udacity_result
-        print result
-        connection.query("INSERT INTO Searches (striptext,search,rating) \
-                            VALUES ('%s','%s','%s');" % (str(query),str(result).encode('ascii','ignore'),str(rating)))
-    return result
+	print "hello"
+	print query
+        cur.execute("INSERT INTO Searches(striptext,search,rating) \
+                            VALUES('%s','%s',%f);" % (str(query),str(result),rating))
+	connection.commit()
+    connection.close()
+    return json.dumps(result,ensure_ascii=True)
+
 
 def coursera(query):
     try:
