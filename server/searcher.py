@@ -6,7 +6,7 @@ def search(query):
     rating = 0.0
     query = query.replace('+', ' ')
     result = ''
-    connection = MySQLdb.connect("localhost", "root", "newpass@123", "code42day")
+    connection = MySQLdb.connect("localhost", "root", "sunita", "code42day")
     query1 = query
     query = query.replace(' ', '').lower()
     cur = connection.cursor()
