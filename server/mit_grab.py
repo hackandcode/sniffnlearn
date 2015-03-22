@@ -31,18 +31,16 @@ def mit_course(query, max_limit=2):
     html = response.read()
     soup = BeautifulSoup(html)
     res = soup.find_all('p')
-    res = res[3:13]
+    res = res[3:max_limit+3]
     data = ""
     for i in res:
         data += str(i)
     soup = BeautifulSoup(data)
     data = '{"mit_ocw":['
-    j = 1
+
     for i in soup.find_all('a'):
         data += '{"' + i.get_text() + '":"' + i.get('href') + '"},'
-        if j == max_limit:
-            break
-        j += 1
+
     data += "]}"
     data = data.encode('ascii', errors='ignore')
     return data
