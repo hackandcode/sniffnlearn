@@ -6,7 +6,11 @@ def search(query):
     rating = 0.0
     query = query.replace('+', ' ')
     result = ''
+<<<<<<< HEAD
     connection = MySQLdb.connect("localhost", "root", "sunita","code42day")#create database manually
+=======
+    connection = MySQLdb.connect("localhost", "root", "newpass@123","code42day")#create database manually
+>>>>>>> b7bbf5cd53c24d68a7eb8293b737b4b1500f778d
     '''change hostname from localhost to your server IP
     change user from 'root' to your user
     change pass to your user's pass
