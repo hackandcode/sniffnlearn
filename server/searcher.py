@@ -1,7 +1,7 @@
 import urllib2, json
 import MySQLdb
 import Search
-
+import mit_grab
 def search(query):
     rating = 0.0
     query = query.replace('+', ' ')
@@ -26,7 +26,7 @@ def search(query):
         data_books = books.search_book(query)
         coursera_result = coursera(query1)
         udacity_result = udacity(query1.replace('+', ' '))
-        result = data_books + coursera_result + udacity_result
+        result = data_books + coursera_result + udacity_result+mit_grab.mit_course(query1.replace(' ','+'))
         cur.execute("INSERT INTO Searches(striptext,search,rating) \
                             VALUES('%s','%s',%f);" % (str(query),str(result),rating))
 	connection.commit()
