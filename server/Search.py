@@ -40,7 +40,6 @@ class Search():
         self.__paper_query = ""
         self.__book_index = 1
         self.__paper_index = 1
-        print "joker"
         return
 
     def __search(self, query, index, max_limit=5):
@@ -70,7 +69,6 @@ class Search():
         data += "],"
         data = data.encode('ascii', errors='ignore')
         data = self.strip_html(data)
-        print "one"
         return data
 
     def strip_html(self,data):
@@ -84,7 +82,7 @@ class Search():
         :return: returns the JSON file of required search result.
         """
         query += " books"
-        self.__book_query = query
+        self.__book_query =  query
         return self.__search(self.__book_query, max_limit=max_limit, index=self.__book_index)
 
     def search_paper(self, query, max_limit=5):

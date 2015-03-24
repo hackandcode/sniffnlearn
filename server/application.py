@@ -6,15 +6,17 @@ def main():
     jsonner.write(result)
     jsonner.close()
     myfile=open("results.json")
+    print "lol"
     JsonObj=json.load(myfile)
     displayResults(JsonObj)
     rating=input("\nPlease rate the search to exit(1-5):")
     
 def displayResults(JsonObj):
+    print 
     print "Coursera Results :\n"
     for i in range(5):
-        print "Title:"+JsonObj['Cousera'][i]['title']
-        print '->'+JsonObj['Cousera'][i]['link']
+        print "Title:"+(JsonObj['coursera'][i]).keys()
+        print '->'+(JsonObj['coursera'][i]).values()
 
     print "Udacity Results :\n"
     for i in range(5):
